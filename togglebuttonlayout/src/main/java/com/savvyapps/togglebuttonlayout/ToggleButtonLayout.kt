@@ -18,6 +18,9 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.graphics.drawable.GradientDrawable
+
+
 
 @Suppress("MemberVisibilityCanBePrivate", "unused")
 /**
@@ -263,7 +266,12 @@ class ToggleButtonLayout : CardView {
         val selectedToggles = selectedToggles()
         selectedToggles.forEach {
             val view = linearLayout.findViewById<View>(it.id)
-            view.background = ColorDrawable(selectedColor)
+
+            val shape = GradientDrawable()
+            shape.cornerRadius = radius - contentPaddingBottom
+            shape.setColor(selectedColor)
+
+            view.background = shape
         }
     }
 
@@ -271,7 +279,11 @@ class ToggleButtonLayout : CardView {
         val view = linearLayout.findViewById<View>(toggle.id)
         view.isSelected = toggle.isSelected
         if (toggle.isSelected) {
-            view.background = ColorDrawable(selectedColor)
+            val shape = GradientDrawable()
+            shape.cornerRadius = radius - contentPaddingBottom
+            shape.setColor(selectedColor)
+
+            view.background = shape
         } else {
             view.background = null
         }
